@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+   <h3> Covertidor de distanacia </h3>
+<form action="">
+  <label for=""> distanacia </label><br><br>
+    <input type="number " name="Valor" placeholder=" Ingrese el valor ">
+<br><br>
+<div>
+     <label for="conversion">Selecciona la conversión: </label>
+        <br><br>
+        <select  id="conversion">
+          <option value="Kilometros">Metros a Kilómetros</option>
+          <option value="Millas">Kilómetros a Millas</option>
+        </select>
+ </form>
+        <br><br>
+        <input type="button" value="Convertir" onclick="convertidor()">
+          <p id="total"></p>
+<br><br>
+
+<script>
+function convertidor() {
+
+  let cantidad = document.querySelector("input").value;
+
+       if (isNaN(cantidad) || cantidad === "") {
+        document.getElementById("total").innerText = "Por favor, ingrese un valor válido";
+        return;
+      }
+      let conversion = document.getElementById("conversion").value;
+      let total = 0;
+      
+      switch (conversion) {
+        case "Kilometros":
+          total = cantidad * 1000; 
+          break;
+        case "Metros":
+          total = cantidad * 100; 
+          break;
+        case "Millas":
+          total = cantidad / 0.621371;
+          break;
+        default:
+          total = "Conversión no válida";
+      }
+      document.getElementById("total").innerText = "El resultado de la conversión es: " + total;
+    }
+  </script>
+<br>
+<h3>Llamada Telefonica</h3>
+
+<form action="">
+  <label for="duracion">Duración de la llamada (en minutos):</label>
+    <input type="number" id="duracion" min="0" requerida>
+    <br><br>
+        <button  type="button" onclick="calcularCosto()">Calcular Costo</button>
+      <br><br>
+  <p id="totalCosto"></p>
+</form>
+
+<script>
+  function calcularCosto() {
+            let costo;
+            const minAdi = 150; 
+            const min = Number(document.getElementById('duracion').value); 
+
+            if (min <=0) {
+                console.log("Error: Duración de llamada inválida.");
+                document.getElementById("totalCosto").innerText = "Error: Duración de llamada inválida.";
+                return null; 
+            }
+
+            if (min <= 5) {
+                costo = 200; 
+            } else if (min > 5 && min == 10) {
+                costo = 200 + (min - 5) * minAdi; 
+            } else {
+                costo = 200 + (5 * minAdi) + (min - 10) * 200; 
+            }
+            document.getElementById("totalCosto").innerText = `El costo de la llamada es: ${costo} pesos.`; 
+           
+        }
+</script>
+</html>
+</body>
+
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Conversor de Temperatura</h1>
+    <form action="javascript:void(0);">
+      <label for="temperatura">Ingrese la temperatura:</label>
+      <input type="number" id="temperatura" required />
+      <br /><br />
+      <label>
+        <input type="radio" name="tipo" value="celsius" checked /> Celsius a Fahrenheit
+      </label>
+      <label>
+        <input type="radio" name="tipo" value="fahrenheit" /> Fahrenheit a Celsius
+      </label>
+      <br /><br />
+
+      <button type="button" onclick="convertirTemperatura()">Convertir</button>
+      <br /><br />
+      <p id="resultado"></p>
+    </form>
+    <script>
+      function convertirTemperatura() {
+        const temperatura = parseFloat(
+          document.getElementById("temperatura").value
+        );
+        const tipo = document.querySelector('input[name="tipo"]:checked').value; // Obtiene el tipo de conversión
+
+        let celsius, fahrenheit;
+
+        // Realiza la conversión según el tipo seleccionado
+        if (tipo === "celsius") {
+          fahrenheit = (temperatura * 9) / 5 + 32;
+          celsius = temperatura;
+        } else {
+          celsius = ((temperatura - 32) * 5) / 9;
+          fahrenheit = temperatura;
+        }
+
+        // Crea un mensaje según la temperatura en Celsius
+        let mensaje;
+        if (celsius < 0) {
+          mensaje = "Nos congelamos";
+        } else if (celsius >= 5 && celsius <= 15) {
+          mensaje = "Está haciendo frío";
+        } else if (celsius >= 16 && celsius <= 25) {
+          mensaje = "Está templado el día";
+        } else {
+          mensaje = "Tiene fiebre o es el apocalipsis";
+        }
+        
+        document.getElementById("resultado").innerText = `Celsius: ${celsius.toFixed(2 )}°C | Fahrenheit: ${fahrenheit.toFixed(2)}°F. ${mensaje}`;
+      }
+    </script>
+
+    <h2>Cálculo de Índice de Masa Corporal (IMC)</h2>
+    <form action="">
+
+      <label for="peso">Ingrese su peso (en kg):</label><br><br>
+      <input type="number" id="peso" min="0" required >
+      <br><br >
+
+      <label for="altura">Ingrese su estatura (en metros):</label><br><br>
+      <input type="number" id="altura" step="0.01" min="0" required />
+      <br><br>
+
+      <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+      <br><br>
+      <p id="Resultado Masa Corporal"></p>
+    </form>
+
+    <script>
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById("peso").value);
+            const altura = parseFloat(document.getElementById("altura").value);
+
+        if (peso <= 0 || altura <= 0) {
+          document.getElementById("resultado").innerText ="Por favor, ingrese valores válidos para peso y altura.";
+          }
+        const imc = peso / (altura * altura);
+
+        let categoria;
+        if (imc < 18.5) {
+          categoria = "bajo";
+        } else if (imc >= 18.5 && imc <= 24.9) {
+          categoria = "normal";
+        } else if (imc >= 25.0 && imc <= 29.9) {
+          categoria = "sobrepeso";
+        } else {
+          categoria = "obeso";
+        }
+
+        let mensaje;
+        switch (categoria) {
+          case "bajo":
+            mensaje = "Bajo peso, debe ir al nutricionista.";
+            break;
+          case "normal":
+            mensaje = "Peso normal.";
+            break;
+          case "sobrepeso":
+            mensaje = "Sobrepeso.";
+            break;
+          case "obeso":
+            mensaje = "Obesidad, debe ir al nutricionista.";
+            break;
+          default:
+            mensaje = "Error al calcular el IMC.";
+            break;
+        }
+        document.getElementById("Resultado Masa Corporal").innerText = `El resultado de su IMC es: ${imc.toFixed(2)}. ${mensaje}`;
+      }
+    </script>
+  </body>
+</html>
